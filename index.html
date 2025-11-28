@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Note Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- PWA MANIFEST LINK (Required for shortcut/install feature) -->
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Productivity Suite</p>
+          <h1>Aninotix</h1>
+          <p class="subhead">
+            Capture Thoughts. Track Priorities.
+          </p>
+        </div>
+        <!-- HEADER ACTIONS CONTAINER FOR NEW BUTTON -->
+        <div class="header-actions">
+          <!-- PWA Install Button (Initially hidden by JS) -->
+          <button id="shortcut-install" class="ghost-btn install-btn" type="button" style="display: none;">
+            Install App
+          </button>
+          <button id="clear-all" class="ghost-btn" type="button">
+            Clear Board
+          </button>
+        </div>
+      </header>
+
+      <section class="composer">
+        <div class="field">
+          <label for="note-title">Title</label>
+          <input
+            id="note-title"
+            name="note-title"
+            type="text"
+            maxlength="60"
+            placeholder="Project kickoff, grocery list..."
+          />
+        </div>
+        <div class="field">
+          <label for="note-body">Details</label>
+          <textarea
+            id="note-body"
+            name="note-body"
+            rows="2"
+            placeholder="Add the context you need to..."
+          ></textarea>
+        </div>
+        <div class="controls">
+          <div class="field">
+            <label for="note-priority">Priority</label>
+            <select id="note-priority" name="note-priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="field palette">
+            <label>Accent</label>
+            <div
+              class="color-swatches"
+              role="radiogroup"
+              aria-label="Note accent"
+            >
+              <button
+                class="swatch is-active"
+                data-color="#fda4af"
+                aria-pressed="true"
+              ></button>
+              <button
+                class="swatch"
+                data-color="#fcd34d"
+                aria-pressed="false"
+              ></button>
+              <button
+                class="swatch"
+                data-color="#bef264"
+                aria-pressed="false"
+              ></button>
+              <button
+                class="swatch"
+                data-color="#93c5fd"
+                aria-pressed="false"
+              ></button>
+              <button
+                class="swatch"
+                data-color="#c4b5fd"
+                aria-pressed="false"
+              ></button>
+            </div>
+          </div>
+          <button id="add-note" type="button" class="primary-btn">
+            Add Note
+          </button>
+        </div>
+      </section>
+
+      <section class="board">
+        <header>
+          <div>
+            <p class="eyebrow">Pinned Thoughts</p>
+            <h2>Active Notes</h2>
+          </div>
+          <div class="filters">
+            <button class="filter-btn is-active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="high">High</button>
+            <button class="filter-btn" data-filter="medium">Medium</button>
+            <button class="filter-btn" data-filter="low">Low</button>
+          </div>
+        </header>
+        <div id="note-grid" class="note-grid" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <template id="note-template">
+      <article class="note-card">
+        <div class="accent-bar"></div>
+        <div class="note-body">
+          <div class="note-meta">
+            <span class="badge"></span>
+            <time></time>
+          </div>
+          <h3></h3>
+          <p></p>
+        </div>
+        <button class="icon-btn" data-action="delete" title="Delete note">
+          ×
+        </button>
+      </article>
+    </template>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
